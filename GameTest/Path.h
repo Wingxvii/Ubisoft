@@ -1,5 +1,6 @@
 #pragma once
-#include "Vec2.h"
+#include "stdafx.h"
+
 #include "Entity.h"
 
 class Path {
@@ -35,14 +36,32 @@ public:
 	Vec2 inner;
 
 	//entity list
-	Entity* entities[];
+	std::vector<Entity*> entities;
 
 	//call this to draw path with all entities contained
 	void Draw() {
 		//draw path
+		Vec2::DrawLine(outerL, outerR, 0.f, 0.f, 1.0f);
+		Vec2::DrawLine(outerL, innerL, 0.f, 0.f, 1.0f);
+		Vec2::DrawLine(innerR, outerR, 0.f, 0.f, 1.0f);
+		Vec2::DrawLine(innerR, innerL, 0.f, 0.f, 1.0f);
 
 		//draw entities
-
+		for each (Entity* ent in entities)
+		{
+			ent->Draw(Vec2::Lerp(inner, outer, ent->pathTravel));
+		}
 
 	}
+
+	//clean up entities
+	~Path(){
+		while (!entities.empty()) {
+			delete entities.back();
+			entities.pop_back();
+		}
+
+	}
+
+
 };

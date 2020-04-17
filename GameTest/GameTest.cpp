@@ -8,12 +8,12 @@
 //------------------------------------------------------------------------
 #include "app\app.h"
 //------------------------------------------------------------------------
-
+#include "LevelManager.h"
 
 //init scene
 void Init() 
 {
-
+	LevelManager::instance()->InitMap(1);
 }
 
 //update scene
@@ -25,13 +25,13 @@ void Update(float deltaTime)
 //render graphics
 void Render() 
 {
-
+	LevelManager::instance()->DrawMap();
 }
 
 //shutdown
 void Shutdown()
 {
-
+	LevelManager::instance()->map.clear();
 }
 
 

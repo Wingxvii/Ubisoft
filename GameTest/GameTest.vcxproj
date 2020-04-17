@@ -184,7 +184,7 @@
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\TextureLoader.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Palette.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

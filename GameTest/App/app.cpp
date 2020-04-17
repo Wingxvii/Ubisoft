@@ -28,7 +28,7 @@ namespace App
 		glVertex2f(ex, ey);
 		glEnd();
 	}
-	
+
 	CSimpleSprite *CreateSprite(const char *fileName, int columns, int rows)
 	{
 		return new CSimpleSprite(fileName, columns, rows);
