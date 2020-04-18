@@ -15,7 +15,6 @@ bool leftReset = true;
 bool rightReset = true;
 bool spaceReset = true;
 
-
 //init scene
 void Init() 
 {

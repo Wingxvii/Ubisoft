@@ -7,7 +7,7 @@ public:
 	Bullet() {
 		pathTravel = 1.0f;
 		speed = -0.01f;
-		color = Color::RED;
+		color = Color::WHITE;
 		active = true;
 	}
 

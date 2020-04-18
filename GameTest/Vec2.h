@@ -30,7 +30,6 @@ public:
 	int _y;
 
 	//overloads
-
 	Vec2 operator+(const Vec2 other) {
 		return Vec2(_x + other._x, _y + other._y);
 	}
@@ -43,8 +42,6 @@ public:
 	Vec2 operator*(const int other) {
 		return Vec2(_x * other, _y * other);
 	}
-
-
 
 	//static helper functions
 
@@ -62,10 +59,10 @@ public:
 		switch (color)
 		{
 		case WHITE:
-			App::DrawLine(x._x, x._y, e._x, e._y, 0, 0, 0);
+			App::DrawLine(x._x, x._y, e._x, e._y, 1, 1, 1);
 			break;
 		case BLACK:
-			App::DrawLine(x._x, x._y, e._x, e._y, 1, 1, 1);
+			App::DrawLine(x._x, x._y, e._x, e._y, 0, 0, 0);
 			break;
 		case BLUE:
 			App::DrawLine(x._x, x._y, e._x, e._y, 0, 0, 1);
