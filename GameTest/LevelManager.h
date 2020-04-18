@@ -4,7 +4,10 @@
 #include <vector>
 #include "Path.h"
 
+
 class LevelManager {
+
+#pragma region singleton 
 	static LevelManager* s_instance;
 
 public:
@@ -15,9 +18,16 @@ public:
 		}
 		return s_instance;
 	}
+#pragma endregion singleton
 
+	//map
 	std::vector<Path> map;
 
+	//player
+	Path* playerPath;
+	int playerIndex;
+
+	//init the level
 	void InitMap(int level) {
 		map.clear();
 
@@ -25,14 +35,13 @@ public:
 		{
 		case 1:
 
-#pragma region map1
+	#pragma region map1
 			map.push_back(Path(
 				Vec2(510, 595),
 				Vec2(413, 573),
 				Vec2(510, 281),
 				Vec2(496, 278)
 				));
-			
 			map.push_back(Path(
 				Vec2(413, 573),
 				Vec2(326, 515),
@@ -124,7 +133,9 @@ public:
 				Vec2(526, 277),
 				Vec2(510, 281)
 			));
-			
+			map[0].hasPlayer = true;
+			playerPath = &map[0];
+			playerIndex = 0;
 #pragma endregion map1
 
 			break;
@@ -134,14 +145,53 @@ public:
 	
 	}
 
+	//move player to the left
+	void MoveLeft() {
+		if (playerIndex == 15) {
+			playerIndex = -1;
+		}
+
+		playerPath->hasPlayer = false;
+		playerPath = &map[++playerIndex];
+		playerPath->hasPlayer = true;
+	}
+
+	//move player to the rightr
+	void MoveRight() {
+		if (playerIndex == 0) {
+			playerIndex = 16;
+		}
+
+		playerPath->hasPlayer = false;
+		playerPath = &map[--playerIndex];
+		playerPath->hasPlayer = true;
+	}
+
+	//move player to the rightr
+	void Shoot() {
+		playerPath->entities.push_back(new Bullet());
+	}
 
 	//draws player sprite in position
 	void DrawMap() {
-		for each (Path path in map)
+		for (int counter = 0; counter < map.size(); counter++)
 		{
-			path.Draw();
+			if (!map[counter].hasPlayer) {
+				map[counter].Draw();
+			}
+		}
+		//draw player path on top
+		playerPath->Draw();
+	}
+
+	//updates the path
+	void Update() {
+		for (int counter = 0; counter < map.size(); counter++)
+		{
+			map[counter].Update();
 		}
 	}
 };
 
+//singleton init
 LevelManager* LevelManager::s_instance = 0;

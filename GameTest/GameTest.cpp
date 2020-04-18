@@ -10,6 +10,12 @@
 //------------------------------------------------------------------------
 #include "LevelManager.h"
 
+//key resets
+bool leftReset = true;
+bool rightReset = true;
+bool spaceReset = true;
+
+
 //init scene
 void Init() 
 {
@@ -19,6 +25,34 @@ void Init()
 //update scene
 void Update(float deltaTime) 
 {
+	if (App::IsKeyPressed(VK_LEFT)) {
+		if (leftReset) { LevelManager::instance()->MoveLeft(); }
+
+
+		leftReset = false;
+	}
+	else {
+		leftReset = true;
+	}
+	if (App::IsKeyPressed(VK_RIGHT)) {
+		if (rightReset) { LevelManager::instance()->MoveRight(); }
+
+		rightReset = false;
+	}
+	else {
+		rightReset = true;
+	}
+
+	if (App::IsKeyPressed(VK_SPACE)) {
+		if (spaceReset) { LevelManager::instance()->Shoot(); }
+
+		spaceReset = false;
+	}
+	else {
+		spaceReset = true;
+	}
+
+	LevelManager::instance()->Update();
 
 }
 
