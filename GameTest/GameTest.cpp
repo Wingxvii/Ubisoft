@@ -3,21 +3,34 @@
 //------------------------------------------------------------------------
 #include "stdafx.h"
 //------------------------------------------------------------------------
+#define _WINSOCKAPI_
 #include <windows.h> 
 #include <math.h>  
 //------------------------------------------------------------------------
 #include "app\app.h"
 //------------------------------------------------------------------------
 #include "LevelManager.h"
+#include "Network.h"
+
+std::string IP = "127.0.0.1";
 
 //key resets
 bool leftReset = true;
 bool rightReset = true;
 bool spaceReset = true;
 
+//network
+Network net;
+
 //init scene
 void Init() 
 {
+	//init network
+	net = Network(IP);
+	if (net.listening) {
+		net.StartUpdate();
+	}
+
 	LevelManager::instance()->InitMap(1);
 }
 
@@ -36,9 +49,12 @@ void Update(float deltaTime)
 	}
 
 
-
+	//inputs
 	if (App::IsKeyPressed(VK_LEFT)) {
-		if (leftReset) { LevelManager::instance()->MoveLeft(); }
+		if (leftReset) { 
+			LevelManager::instance()->MoveLeft(); 
+			net.SendData(1);
+		}
 
 
 		leftReset = false;
@@ -47,7 +63,10 @@ void Update(float deltaTime)
 		leftReset = true;
 	}
 	if (App::IsKeyPressed(VK_RIGHT)) {
-		if (rightReset) { LevelManager::instance()->MoveRight(); }
+		if (rightReset) { 
+			LevelManager::instance()->MoveRight(); 
+			net.SendData(2);
+		}
 
 		rightReset = false;
 	}
@@ -57,12 +76,37 @@ void Update(float deltaTime)
 
 
 	if (App::IsKeyPressed(VK_SPACE)) {
-		if (spaceReset) { LevelManager::instance()->Shoot(); }
+		if (spaceReset) { 
+			LevelManager::instance()->Shoot();
+			net.SendData(0);
+		}
 
 		spaceReset = false;
 	}
 	else {
 		spaceReset = true;
+	}
+
+	//network
+	while (!net.packetsIn.empty()) {
+		Packet* pack = &net.packetsIn.back();
+
+		switch (pack->packet_type)
+		{
+		case 0:
+			LevelManager::instance()->OtherShoot();
+			break;
+		case 1:
+			LevelManager::instance()->OtherMoveLeft();
+			break;
+		case 2:
+			LevelManager::instance()->OtherMoveRight();
+			break;
+		default:
+			break;
+		}
+		
+		net.packetsIn.pop_back();
 	}
 
 	LevelManager::instance()->Update();
@@ -79,6 +123,7 @@ void Render()
 void Shutdown()
 {
 	LevelManager::instance()->map.clear();
+	net.ShutDown();
 }
 
 

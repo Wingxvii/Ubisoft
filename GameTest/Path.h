@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Bullet.h"
+#include "LevelManager.h"
 
 class Path {
 
@@ -15,6 +16,14 @@ public:
 		inner = Vec2::Lerp(innerL, innerR, 0.5f);
 		hasPlayer = false;
 		hasOtherPlayer = false;
+	}
+	//clean up entities
+	~Path() {
+		while (!entities.empty()) {
+			delete entities.back();
+			entities.pop_back();
+		}
+
 	}
 
 	//currently has player
@@ -115,14 +124,7 @@ public:
 
 	}
 
-	//clean up entities
-	~Path(){
-		while (!entities.empty()) {
-			delete entities.back();
-			entities.pop_back();
-		}
 
-	}
 
 
 };

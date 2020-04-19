@@ -1,91 +1,4 @@
-﻿  Bullet.cpp
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(40,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(40,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(50,65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(50,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(54,14): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Entity.h(21,15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Entity.cpp
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Bullet.h(42,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(40,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(40,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(50,65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(50,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(54,14): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(60,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(67,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(70,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(73,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(76,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(79,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(82,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(85,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  GameTest.cpp
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Entity.h(21,15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+﻿  GameTest.cpp
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(40,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(40,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(50,65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -129,8 +42,9 @@ C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,25): warning C4
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Entity.h(21,15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Bullet.h(42,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Network.cpp
   Generating Code...
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Path.h(52,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Path.h(61,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   GameTest.vcxproj -> C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\x64\Debug\GameTest.exe
   C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied
