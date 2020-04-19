@@ -1,7 +1,6 @@
 #pragma once
 #include "Entity.h"
 #include "Bullet.h"
-#include "LevelManager.h"
 
 class Path {
 
@@ -48,6 +47,9 @@ public:
 	Vec2 outer;
 	Vec2 inner;
 
+	//player hit flag
+	bool playerHit = false;
+
 	//entity list
 	std::vector<Entity*> entities;
 
@@ -63,8 +65,10 @@ public:
 			entities[counter]->Update();
 			if (!entities[counter]->active) {
 
-				if ((hasPlayer || hasOtherPlayer) && entities[counter]->type == BULLET) {
-					//TODO: hit
+				//check local player collision
+				if ((hasPlayer) && entities[counter]->type == BULLET && entities[counter]->dir != -1) {
+					//damaged
+					playerHit = true;
 				}
 
 				garbageList.push_back(counter);

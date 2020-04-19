@@ -42,9 +42,7 @@ C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,25): warning C4
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Vec2.h(88,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Entity.h(21,15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Bullet.h(42,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Network.cpp
-  Generating Code...
-C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Path.h(61,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\GameTest\Path.h(63,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   GameTest.vcxproj -> C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\x64\Debug\GameTest.exe
   C:\Users\turnt\OneDrive\Documents\C++\Ubisoft\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied

@@ -1,8 +1,9 @@
 #pragma once
 #include "stdafx.h"
-
 #include <vector>
 #include "Path.h"
+#include "Network.h"
+#include "app\app.h"
 
 
 class LevelManager {
@@ -26,14 +27,24 @@ public:
 	//player
 	Path* playerPath;
 	int playerIndex;
+	int lives = 3;
 
 	//other player
 	Path* otherPlayerPath;
 	int otherPlayerIndex;
+	int otherLives = 3;
+
+	//network reference
+	Network net;
+
+	//game status
+	bool playing = false;
 
 	//init the level
 	void InitMap(int level) {
 		map.clear();
+
+		playing = true;
 
 		switch (level)
 		{
@@ -155,6 +166,8 @@ public:
 
 	//move player to the left
 	void MoveLeft() {
+		net.SendData(1);
+
 		if (playerIndex == 15) {
 			playerIndex = -1;
 		}
@@ -164,8 +177,10 @@ public:
 		playerPath->hasPlayer = true;
 	}
 
-	//move player to the rightr
+	//move player to the right
 	void MoveRight() {
+		net.SendData(2);
+
 		if (playerIndex == 0) {
 			playerIndex = 16;
 		}
@@ -175,11 +190,30 @@ public:
 		playerPath->hasPlayer = true;
 	}
 
-	//move player to the rightr
+	//player shoot
 	void Shoot() {
+		net.SendData(0);
 		playerPath->entities.push_back(new Bullet(-1));
 	}
 
+	//when player is hit
+	void OnDamage() {
+		net.SendData(3);
+
+		//remove all entities
+		for (int counter = 0; counter < map.size(); counter++) {
+			for (Entity* ent : map[counter].entities) {
+				ent->active = false;
+			}
+		}
+		lives--;
+
+		//check if lost
+		if (lives == 0) {
+			playing = false;
+			DrawLose();
+		}
+	}
 
 	//move player to the left
 	void OtherMoveLeft() {
@@ -193,7 +227,7 @@ public:
 
 	}
 
-	//move player to the rightr
+	//move player to the right
 	void OtherMoveRight() {
 		if (otherPlayerIndex == 15) {
 			otherPlayerIndex = -1;
@@ -205,15 +239,43 @@ public:
 
 	}
 
-	//move player to the rightr
+	//other player shoot
 	void OtherShoot() {
 		otherPlayerPath->entities.push_back(new Bullet(1));
+	}
+
+	//when other player is hit
+	void OnDamageOther() {
+		//remove all entities
+		for (int counter = 0; counter < map.size(); counter++) {
+			for (Entity* ent : map[counter].entities) {
+				ent->active = false;
+			}
+		}
+		otherLives--;
+
+		//check if won
+		if (otherLives == 0) {
+			playing = false;
+			DrawWin();
+		}
 	}
 
 
 
 	//draws player sprite in position
 	void DrawMap() {
+
+		//display win/lose
+		if (!playing) { 	
+			if (lives == 0) {
+				DrawLose();
+			}
+			else {
+				DrawWin();
+			}
+		}
+
 		for (int counter = 0; counter < map.size(); counter++)
 		{
 			if (!map[counter].hasPlayer || !map[counter].hasOtherPlayer) {
@@ -226,12 +288,122 @@ public:
 
 	}
 
+	//draw win over screen
+	void DrawWin() {
+		char winText[4] = "WIN";
+		App::Print(500, 550, winText, 1.0f, 1.0f, 1.0f, GLUT_BITMAP_TIMES_ROMAN_24);
+	}
+
+	//draw lose over screen
+	void DrawLose() {
+		char loseText[5] = "LOSE";
+		App::Print(500, 550, loseText, 1.0f, 1.0f, 1.0f, GLUT_BITMAP_TIMES_ROMAN_24);
+
+	}
+
+	//draws current lives for each player
+	void DrawLives() {
+		//current player lives
+		for (int counter = 0; counter < lives; counter++) {
+			int offset = -45;
+
+			Vec2::DrawLine(	Vec2(193 + (offset * counter), 602),
+							Vec2(178 + (offset * counter), 608), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(178 + (offset * counter), 608),
+							Vec2(195 + (offset * counter), 615), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(195 + (offset * counter), 615),
+							Vec2(215 + (offset * counter), 608), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(215 + (offset * counter), 608),
+							Vec2(199 + (offset * counter), 602), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(199 + (offset * counter), 602),
+							Vec2(205 + (offset * counter), 606), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(205 + (offset * counter), 606),
+							Vec2(196 + (offset * counter), 608), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(196 + (offset * counter), 608),
+							Vec2(187 + (offset * counter), 606), Color::YELLOW
+			);
+			Vec2::DrawLine(	Vec2(187 + (offset * counter), 606),
+							Vec2(193 + (offset * counter), 602), Color::YELLOW
+			);
+		}
+
+		//other player lives
+		for (int counter = 0; counter < otherLives; counter++) {
+			int offset = 45;
+
+			Vec2::DrawLine(	Vec2(793 + (offset * counter), 602),
+							Vec2(778 + (offset * counter), 608), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(778 + (offset * counter), 608),		
+							Vec2(795 + (offset * counter), 615), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(795 + (offset * counter), 615),		
+							Vec2(815 + (offset * counter), 608), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(815 + (offset * counter), 608),		
+							Vec2(799 + (offset * counter), 602), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(799 + (offset * counter), 602),		
+							Vec2(805 + (offset * counter), 606), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(805 + (offset * counter), 606),		
+							Vec2(796 + (offset * counter), 608), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(796 + (offset * counter), 608),		
+							Vec2(787 + (offset * counter), 606), Color::RED
+			);															
+			Vec2::DrawLine(	Vec2(787 + (offset * counter), 606),		
+							Vec2(793 + (offset * counter), 602), Color::RED
+			);
+		}
+
+	}
+
 	//updates the path
 	void Update() {
+		//check if game is active
+		if (!playing) { return; }
+
+		//network
+		while (!net.packetsIn.empty()) {
+			Packet* pack = &net.packetsIn.back();
+
+			switch (pack->packet_type)
+			{
+			case 0:
+				OtherShoot();
+				break;
+			case 1:
+				OtherMoveLeft();
+				break;
+			case 2:
+				OtherMoveRight();
+				break;
+			default:
+				break;
+			}
+
+			net.packetsIn.pop_back();
+		}
+
 		for (int counter = 0; counter < map.size(); counter++)
 		{
 			map[counter].Update();
+
+			//check for flags
+			if (map[counter].playerHit) {
+				OnDamage();
+				map[counter].playerHit = false;
+			}
 		}
+
+
 	}
 };
 

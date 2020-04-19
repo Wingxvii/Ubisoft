@@ -13,6 +13,7 @@ enum PacketType {
 	ATTACK = 0,
 	MOVEL = 1,
 	MOVER = 2,
+	DEATH = 3,
 };
 
 
