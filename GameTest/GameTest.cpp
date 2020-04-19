@@ -10,6 +10,7 @@
 #include "app\app.h"
 //------------------------------------------------------------------------
 #include "LevelManager.h"
+#include "Animation.h"
 
 std::string IP = "127.0.0.1";
 
@@ -17,6 +18,7 @@ std::string IP = "127.0.0.1";
 bool leftReset = true;
 bool rightReset = true;
 bool spaceReset = true;
+bool pReset = true;
 
 
 //init scene
@@ -28,6 +30,8 @@ void Init()
 		LevelManager::instance()->net.StartUpdate();
 	}
 	LevelManager::instance()->InitMap(1);
+
+	Animation::Init();
 }
 
 //update scene
@@ -64,8 +68,6 @@ void Update(float deltaTime)
 	else {
 		rightReset = true;
 	}
-
-
 	if (App::IsKeyPressed(VK_SPACE)) {
 		if (spaceReset) { 
 			LevelManager::instance()->Shoot();
@@ -76,9 +78,21 @@ void Update(float deltaTime)
 	else {
 		spaceReset = true;
 	}
+	if (App::IsKeyPressed('P')) {
+		if (pReset) {
+			LevelManager::instance()->Pause();
+			//send pause
+			LevelManager::instance()->net.SendData(4);
+		}
+		pReset = false;
+	}
+	else {
+		pReset = true;
+	}
 
 
 	LevelManager::instance()->Update();
+	Animation::Update(deltaTime);
 
 }
 
@@ -87,6 +101,7 @@ void Render()
 {
 	LevelManager::instance()->DrawMap();
 	LevelManager::instance()->DrawLives();
+	Animation::Draw();
 }
 
 //shutdown

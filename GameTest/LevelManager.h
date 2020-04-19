@@ -4,6 +4,7 @@
 #include "Path.h"
 #include "Network.h"
 #include "app\app.h"
+#include "Animation.h"
 
 
 class LevelManager {
@@ -38,13 +39,17 @@ public:
 	Network net;
 
 	//game status
-	bool playing = false;
+	bool gameActive = false;
+	bool pause = false;
+
+	//flag to keep track of explosion pause
+	bool animationExplosionFlag = false;
 
 	//init the level
 	void InitMap(int level) {
 		map.clear();
 
-		playing = true;
+		gameActive = true;
 
 		switch (level)
 		{
@@ -166,6 +171,9 @@ public:
 
 	//move player to the left
 	void MoveLeft() {
+		//ignore if paused
+		if (pause) { return; }
+
 		net.SendData(1);
 
 		if (playerIndex == 15) {
@@ -179,6 +187,9 @@ public:
 
 	//move player to the right
 	void MoveRight() {
+		//ignore if paused
+		if (pause) { return; }
+
 		net.SendData(2);
 
 		if (playerIndex == 0) {
@@ -192,25 +203,30 @@ public:
 
 	//player shoot
 	void Shoot() {
+		//ignore if paused
+		if (pause) { return; }
+
 		net.SendData(0);
 		playerPath->entities.push_back(new Bullet(-1));
 	}
 
 	//when player is hit
 	void OnDamage() {
+		//update network
 		net.SendData(3);
+
+		//play animation
+		Animation::PlayExplotion(playerPath->outer);
 
 		//remove all entities
 		for (int counter = 0; counter < map.size(); counter++) {
-			for (Entity* ent : map[counter].entities) {
-				ent->active = false;
-			}
+			map[counter].entities.clear();
 		}
 		lives--;
 
 		//check if lost
 		if (lives == 0) {
-			playing = false;
+			gameActive = false;
 			DrawLose();
 		}
 	}
@@ -246,6 +262,10 @@ public:
 
 	//when other player is hit
 	void OnDamageOther() {
+
+		//play animation
+		Animation::PlayExplotion(otherPlayerPath->outer);
+
 		//remove all entities
 		for (int counter = 0; counter < map.size(); counter++) {
 			for (Entity* ent : map[counter].entities) {
@@ -256,18 +276,16 @@ public:
 
 		//check if won
 		if (otherLives == 0) {
-			playing = false;
+			gameActive = false;
 			DrawWin();
 		}
 	}
-
-
 
 	//draws player sprite in position
 	void DrawMap() {
 
 		//display win/lose
-		if (!playing) { 	
+		if (!gameActive) { 	
 			if (lives == 0) {
 				DrawLose();
 			}
@@ -275,6 +293,10 @@ public:
 				DrawWin();
 			}
 		}
+		if (pause && !Animation::explosionActive) {
+			DrawPause();
+		}
+		
 
 		for (int counter = 0; counter < map.size(); counter++)
 		{
@@ -291,13 +313,38 @@ public:
 	//draw win over screen
 	void DrawWin() {
 		char winText[4] = "WIN";
-		App::Print(500, 550, winText, 1.0f, 1.0f, 1.0f, GLUT_BITMAP_TIMES_ROMAN_24);
+		App::Print(500, 550, winText, 1.0f, 1.0f, 0.8f, GLUT_BITMAP_TIMES_ROMAN_24);
 	}
 
 	//draw lose over screen
 	void DrawLose() {
 		char loseText[5] = "LOSE";
-		App::Print(500, 550, loseText, 1.0f, 1.0f, 1.0f, GLUT_BITMAP_TIMES_ROMAN_24);
+		App::Print(500, 550, loseText, 1.0f, 1.0f, 0.8f, GLUT_BITMAP_TIMES_ROMAN_24);
+
+	}
+
+	//draw pause
+	void DrawPause() {
+		if (!Animation::explosionActive && animationExplosionFlag) {
+			animationExplosionFlag = false;
+			pause = false;
+			return;
+		}
+
+		char pauseText[7] = "PAUSED";
+		App::Print(500, 550, pauseText, 1.0f, 1.0f, 0.8f, GLUT_BITMAP_TIMES_ROMAN_24);
+
+	}
+
+
+	//switch pause
+	void Pause() {
+		if (pause) {
+			pause = false;
+		}
+		else {
+			pause = true;
+		}
 
 	}
 
@@ -367,8 +414,14 @@ public:
 
 	//updates the path
 	void Update() {
+		//check to see if pause needs to be on
+		if (Animation::explosionActive) { 
+			pause = true; 
+			animationExplosionFlag = true;
+		}
+
 		//check if game is active
-		if (!playing) { return; }
+		if (!gameActive || pause) { return; }
 
 		//network
 		while (!net.packetsIn.empty()) {
@@ -385,6 +438,12 @@ public:
 			case 2:
 				OtherMoveRight();
 				break;
+			case 3:
+				OnDamageOther();
+				break;
+			case 4:
+				Pause();
+				break;
 			default:
 				break;
 			}
@@ -392,6 +451,7 @@ public:
 			net.packetsIn.pop_back();
 		}
 
+		//update path
 		for (int counter = 0; counter < map.size(); counter++)
 		{
 			map[counter].Update();
@@ -400,6 +460,7 @@ public:
 			if (map[counter].playerHit) {
 				OnDamage();
 				map[counter].playerHit = false;
+
 			}
 		}
 

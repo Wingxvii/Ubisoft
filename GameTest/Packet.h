@@ -14,6 +14,7 @@ enum PacketType {
 	MOVEL = 1,
 	MOVER = 2,
 	DEATH = 3,
+	PAUSE = 4,
 };
 
 
