@@ -63,16 +63,20 @@ public:
 		for(int counter = entities.size() -1; counter >=0 ; counter--)
 		{
 			entities[counter]->Update();
-			if (!entities[counter]->active) {
+			if (!entities[counter]->active){
+				garbageList.push_back(counter);
 
 				//check local player collision
-				if ((hasPlayer) && entities[counter]->type == BULLET && entities[counter]->dir != -1) {
-					//damaged
-					playerHit = true;
-				}
+				if ((entities[counter]->pathTravel <= 0.0f || entities[counter]->pathTravel >= 1.0f))
+				{
+					if ((hasPlayer) && entities[counter]->type == BULLET && entities[counter]->dir != -1) {
+						//damaged
+						playerHit = true;
+					}
 
-				garbageList.push_back(counter);
+				}
 			}
+
 		}
 
 		//garbage collect in reverse index order

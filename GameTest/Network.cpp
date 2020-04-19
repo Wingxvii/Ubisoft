@@ -28,6 +28,7 @@ Network::Network(std::string ip)
 
 }
 
+//connect to server
 void Network::Connect(std::string ip)
 {
 	inet_pton(AF_INET, ip.c_str(), &serverTCP.sin_addr);
@@ -41,6 +42,7 @@ void Network::Connect(std::string ip)
 	}
 }
 
+//begin multithreaded updates
 void Network::StartUpdate()
 {
 	std::thread update = std::thread([&]() {
@@ -64,6 +66,7 @@ void Network::StartUpdate()
 	update.detach();
 }
 
+//send data to network
 void Network::SendData(int packetType)
 {
 	Packet packet;
@@ -78,6 +81,7 @@ void Network::SendData(int packetType)
 	int sendResult = send(tcp, packet_data, packet_size, 0);
 }
 
+//cleanup
 void Network::ShutDown()
 {
 

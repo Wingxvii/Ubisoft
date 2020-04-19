@@ -2,6 +2,7 @@
 
 #include "app\app.h"
 
+//colors used for drawing shortcut
 enum Color {
 	WHITE,
 	BLACK,
@@ -60,6 +61,7 @@ public:
 		App::DrawLine(x._x, x._y, e._x, e._y, r, g, b);
 	}
 
+	//color wrapper
 	static void DrawLine(Vec2 x, Vec2 e, Color color) {
 		switch (color)
 		{

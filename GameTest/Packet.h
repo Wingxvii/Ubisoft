@@ -8,7 +8,7 @@
 #include <ws2tcpip.h>
 
 #pragma comment (lib, "ws2_32.lib")
-
+//packet types
 enum PacketType {
 	ATTACK = 0,
 	MOVEL = 1,
@@ -17,7 +17,7 @@ enum PacketType {
 	PAUSE = 4,
 };
 
-
+//packet struct for serialization
 struct Packet {
 
 	unsigned int packet_type;

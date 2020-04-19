@@ -12,7 +12,7 @@
 #include "LevelManager.h"
 #include "Animation.h"
 
-std::string IP = "127.0.0.1";
+std::string IP = "192.168.2.13";
 
 //key resets
 bool leftReset = true;
@@ -78,11 +78,13 @@ void Update(float deltaTime)
 	else {
 		spaceReset = true;
 	}
+
+	//pause
 	if (App::IsKeyPressed('P')) {
 		if (pReset) {
-			LevelManager::instance()->Pause();
 			//send pause
 			LevelManager::instance()->net.SendData(4);
+			LevelManager::instance()->Pause();
 		}
 		pReset = false;
 	}

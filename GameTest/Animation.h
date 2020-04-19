@@ -18,7 +18,7 @@ public:
 	static void Init() {
 		explosionActive = false;
 		explosionTimer = 0;
-		explosion = App::CreateSprite(".\\explotion.bmp", 7, 1);
+		explosion = App::CreateSprite(".\\explotion.bmp", 7, 1);	//TODO: fix sprite sheet
 		float speed = 2.0f / 7.0f;
 		explosion->CreateAnimation(0, speed, { 0,1,2,3,4,5,6 });
 		explosion->SetScale(1.0f);

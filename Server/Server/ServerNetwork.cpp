@@ -1,7 +1,7 @@
 #include "ServerNetwork.h"
 ServerNetwork::ServerNetwork()
 {
-	//1: Start Winsock
+	//start Winsock
 	WSADATA data;
 	WORD version = MAKEWORD(2, 2);
 
@@ -29,6 +29,7 @@ ServerNetwork::ServerNetwork()
 
 }
 
+//cleanup
 ServerNetwork::~ServerNetwork()
 {
 	listening = false;
@@ -40,6 +41,7 @@ ServerNetwork::~ServerNetwork()
 void ServerNetwork::startUpdates()
 {
 
+	//connect player 1
 		sockaddr_in client;
 		int clientSize = sizeof(client);
 		p1 = accept(listener, (sockaddr*)&client, &clientSize);
@@ -52,6 +54,7 @@ void ServerNetwork::startUpdates()
 			std::cout << "Socket Connected" << std::endl;
 		}
 
+		//connect player 2
 		sockaddr_in client2;
 		int clientSize2 = sizeof(client2);
 		p2 = accept(listener, (sockaddr*)&client2, &clientSize2);
@@ -65,8 +68,7 @@ void ServerNetwork::startUpdates()
 			std::cout << "Socket Connected" << std::endl;
 		}
 
-
-
+		//begin packet relaying
 		std::thread p1Listen = std::thread([&]() {
 			while (listening) {
 				char* buf = new char[6000];
@@ -82,6 +84,7 @@ void ServerNetwork::startUpdates()
 					std::cout << "Recieve Error: " << WSAGetLastError() << std::endl;
 				}
 				else {
+					//directly send to other player
 					int sendOK = send(p2, buf, 6000, 0);
 					if (sendOK == SOCKET_ERROR) {
 						std::cout << "Send Error: " << WSAGetLastError() << std::endl;
@@ -92,7 +95,6 @@ void ServerNetwork::startUpdates()
 			});
 
 		p1Listen.detach();
-
 		std::thread p2Listen = std::thread([&]() {
 			while (listening) {
 				char* buf = new char[6000];

@@ -157,9 +157,9 @@ public:
 			playerPath = &map[0];
 			playerIndex = 0;
 
-			map[0].hasOtherPlayer = true;
-			otherPlayerPath = &map[0];
-			otherPlayerIndex = 0;
+			map[15].hasOtherPlayer = true;
+			otherPlayerPath = &map[15];
+			otherPlayerIndex = 15;
 #pragma endregion map1
 
 			break;
@@ -264,7 +264,7 @@ public:
 	void OnDamageOther() {
 
 		//play animation
-		Animation::PlayExplotion(otherPlayerPath->outer);
+		Animation::PlayExplotion(otherPlayerPath->inner);
 
 		//remove all entities
 		for (int counter = 0; counter < map.size(); counter++) {
@@ -297,7 +297,7 @@ public:
 			DrawPause();
 		}
 		
-
+		//draw
 		for (int counter = 0; counter < map.size(); counter++)
 		{
 			if (!map[counter].hasPlayer || !map[counter].hasOtherPlayer) {
@@ -423,7 +423,7 @@ public:
 		//check if game is active
 		if (!gameActive || pause) { return; }
 
-		//network
+		//packet processing
 		while (!net.packetsIn.empty()) {
 			Packet* pack = &net.packetsIn.back();
 
