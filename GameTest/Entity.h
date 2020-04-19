@@ -18,7 +18,11 @@ public:
 	float pathTravel = 0.f;
 
 	//path collision radius
-	float radius = 0.f;
+	int radius = 0.f;
+
+	//max and min sizes
+	int maxRad;
+	int minRad;
 
 	//activity
 	bool active = false;
@@ -26,9 +30,12 @@ public:
 	//type
 	Type type = NONE;
 
+	//direction of travel
+	int dir;
+
 	virtual void Update() = 0;
 
 	virtual void Draw(Vec2) = 0;
 
-	virtual void Collided(Type) = 0;
+	virtual void Collided(Entity*) = 0;
 };

@@ -4,29 +4,38 @@
 class Bullet : public Entity
 {
 public:
-	Bullet() {
-		pathTravel = 1.0f;
-		speed = -0.01f;
-		color = Color::WHITE;
+	Bullet(int dir) {
+		if (dir == -1) {
+			pathTravel = 1.0f;
+			color = Color::WHITE;
+		}
+		else {
+			pathTravel = 0.0f;
+			color = Color::MAGENTA;
+		}
+
+		speed = 0.01f;
+		this->dir = dir;
 		active = true;
+		type = BULLET;
+
+		maxRad = 12;
+		minRad = 3;
 	}
 
 	//traveling speed
 	float speed;
 	Color color;
 
-	//size
-	float maxRad = 12;
-	float minRad = 3;
 
 	void Update() override {
 
 		//update position
-		if (pathTravel > 0.0f) {
-			pathTravel += speed;
+		if (pathTravel < 0.0f || pathTravel > 1.0f) {
+			active = false;
 		}
 		else {
-			active = false;
+			pathTravel += speed * dir;
 		}
 
 		//update size relative
@@ -42,8 +51,13 @@ public:
 
 	}
 
-	void Collided(Type other) override {
-		//do nothing
+	void Collided(Entity* other) override {
+		if (other->type == BULLET) {
+			active = false;
+			other->active = false;
+			//TODO: Play Explosion
+		}
+
 	}
 
 };

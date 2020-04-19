@@ -14,10 +14,14 @@ public:
 		outer = Vec2::Lerp(outerL, outerR, 0.5f);
 		inner = Vec2::Lerp(innerL, innerR, 0.5f);
 		hasPlayer = false;
+		hasOtherPlayer = false;
 	}
 
 	//currently has player
 	bool hasPlayer;
+
+	//currently has contesting player
+	bool hasOtherPlayer;
 
 	//is enabled
 	bool enabled;
@@ -49,6 +53,11 @@ public:
 		{
 			entities[counter]->Update();
 			if (!entities[counter]->active) {
+
+				if ((hasPlayer || hasOtherPlayer) && entities[counter]->type == BULLET) {
+					//TODO: hit
+				}
+
 				garbageList.push_back(counter);
 			}
 		}
@@ -62,27 +71,15 @@ public:
 		//check colision
 		for (Entity * ent : entities)
 		{
-			for each (Entity * ent2 in entities)
+			for (Entity * ent2 : entities)
 			{
-				bool collided = false;
-				//skip
-				if (ent == ent2) { continue; }
+				//skip if same direction or if same
+				if (ent == ent2 || ent->dir == ent2->dir) { continue; }
 
-				//collision checks
-				if (ent->pathTravel == ent2->pathTravel) {
-					collided = true;
-				}else if (ent->pathTravel > ent2->pathTravel && 
-					ent->pathTravel - ent->radius < ent2->pathTravel + ent2->radius) {
-					collided = true;
-				}else if (ent->pathTravel < ent2->pathTravel && 
-					ent->pathTravel + ent->radius > ent2->pathTravel - ent2->radius) {
-					collided = true;
-				}
-
-				//handle collision
-				if (collided) {
-					ent->Collided(ent2->type);
-					ent2->Collided(ent->type);
+				//check collsion using circle method
+				if (Vec2::Dist(Vec2::Lerp(inner, outer, ent->pathTravel), Vec2::Lerp(inner, outer, ent2->pathTravel)) < ent->radius + ent2->radius) {
+					ent->Collided(ent2);
+					ent2->Collided(ent);
 				}
 			}
 		}
@@ -93,16 +90,22 @@ public:
 	void Draw() {
 		//draw path
  		if (hasPlayer) {
-			Vec2::DrawLine(outerL, outerR, 1.f, 1.f, 0.0f);
-			Vec2::DrawLine(outerL, innerL, 1.f, 1.f, 0.0f);
-			Vec2::DrawLine(innerR, outerR, 1.f, 1.f, 0.0f);
-			Vec2::DrawLine(innerR, innerL, 1.f, 1.f, 0.0f);
+			Vec2::DrawLine(outerL, outerR, Color::YELLOW);
+			Vec2::DrawLine(outerL, innerL, Color::YELLOW);
+			Vec2::DrawLine(innerR, outerR, Color::YELLOW);
+			Vec2::DrawLine(innerR, innerL, Color::YELLOW);
+		}
+		else if (hasOtherPlayer) {
+			Vec2::DrawLine(outerL, outerR, Color::RED);
+			Vec2::DrawLine(outerL, innerL, Color::RED);
+			Vec2::DrawLine(innerR, outerR, Color::RED);
+			Vec2::DrawLine(innerR, innerL, Color::RED);
 		}
 		else {
-			Vec2::DrawLine(outerL, outerR, 0.f, 0.f, 1.0f);
-			Vec2::DrawLine(outerL, innerL, 0.f, 0.f, 1.0f);
-			Vec2::DrawLine(innerR, outerR, 0.f, 0.f, 1.0f);
-			Vec2::DrawLine(innerR, innerL, 0.f, 0.f, 1.0f);
+			Vec2::DrawLine(outerL, outerR, Color::BLUE);
+			Vec2::DrawLine(outerL, innerL, Color::BLUE);
+			Vec2::DrawLine(innerR, outerR, Color::BLUE);
+			Vec2::DrawLine(innerR, innerL, Color::BLUE);
 		}
 		//draw entities
 		for (Entity* ent : entities)

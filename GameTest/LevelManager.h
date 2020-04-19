@@ -27,6 +27,10 @@ public:
 	Path* playerPath;
 	int playerIndex;
 
+	//other player
+	Path* otherPlayerPath;
+	int otherPlayerIndex;
+
 	//init the level
 	void InitMap(int level) {
 		map.clear();
@@ -129,13 +133,17 @@ public:
 			));
 			map.push_back(Path(
 				Vec2(611, 572),
-				Vec2(511, 595),
+				Vec2(510, 595),
 				Vec2(526, 277),
 				Vec2(510, 281)
 			));
 			map[0].hasPlayer = true;
 			playerPath = &map[0];
 			playerIndex = 0;
+
+			map[0].hasOtherPlayer = true;
+			otherPlayerPath = &map[0];
+			otherPlayerIndex = 0;
 #pragma endregion map1
 
 			break;
@@ -169,19 +177,53 @@ public:
 
 	//move player to the rightr
 	void Shoot() {
-		playerPath->entities.push_back(new Bullet());
+		playerPath->entities.push_back(new Bullet(-1));
 	}
+
+
+	//move player to the left
+	void OtherMoveLeft() {
+		if (otherPlayerIndex == 0) {
+			otherPlayerIndex = 16;
+		}
+
+		otherPlayerPath->hasOtherPlayer = false;
+		otherPlayerPath = &map[--otherPlayerIndex];
+		otherPlayerPath->hasOtherPlayer = true;
+
+	}
+
+	//move player to the rightr
+	void OtherMoveRight() {
+		if (otherPlayerIndex == 15) {
+			otherPlayerIndex = -1;
+		}
+
+		otherPlayerPath->hasOtherPlayer = false;
+		otherPlayerPath = &map[++otherPlayerIndex];
+		otherPlayerPath->hasOtherPlayer = true;
+
+	}
+
+	//move player to the rightr
+	void OtherShoot() {
+		otherPlayerPath->entities.push_back(new Bullet(1));
+	}
+
+
 
 	//draws player sprite in position
 	void DrawMap() {
 		for (int counter = 0; counter < map.size(); counter++)
 		{
-			if (!map[counter].hasPlayer) {
+			if (!map[counter].hasPlayer || !map[counter].hasOtherPlayer) {
 				map[counter].Draw();
 			}
 		}
 		//draw player path on top
+		otherPlayerPath->Draw();
 		playerPath->Draw();
+
 	}
 
 	//updates the path

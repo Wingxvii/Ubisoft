@@ -49,6 +49,11 @@ public:
 	static Vec2 Lerp(Vec2 start, Vec2 end, float t) {
 		return Vec2(start._x * (1-t) + end._x * t, start._y * (1 - t) + end._y * t);
 	}
+	//distance
+	static float Dist(Vec2 start, Vec2 end) {
+		return sqrt(pow(end._x - start._x,2) + pow(end._y - start._y, 2));
+	}
+
 
 	//drawline wrapper
 	static void DrawLine(Vec2 x, Vec2 e, float r = 1.0f, float g = 1.0f, float b = 1.0f) {

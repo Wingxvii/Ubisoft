@@ -24,6 +24,19 @@ void Init()
 //update scene
 void Update(float deltaTime) 
 {
+	//DEBUG MULTIPLAYER 
+	if (App::IsKeyPressed('A')) {
+		LevelManager::instance()->OtherMoveLeft();
+	}
+	if (App::IsKeyPressed('D')) {
+		LevelManager::instance()->OtherMoveRight();
+	}
+	if (App::IsKeyPressed('S')) {
+		LevelManager::instance()->OtherShoot();
+	}
+
+
+
 	if (App::IsKeyPressed(VK_LEFT)) {
 		if (leftReset) { LevelManager::instance()->MoveLeft(); }
 
@@ -41,6 +54,7 @@ void Update(float deltaTime)
 	else {
 		rightReset = true;
 	}
+
 
 	if (App::IsKeyPressed(VK_SPACE)) {
 		if (spaceReset) { LevelManager::instance()->Shoot(); }
